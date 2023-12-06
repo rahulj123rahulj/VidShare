@@ -17,9 +17,12 @@ export const register=(req,res)=>{
             })
             console.log("UserAuth has been created");
             const q1="select idUserAuth from UserAuth where userName=?"
+            
 
+            
 
             db.query(q1,[req.body.username],(err,data)=>{
+                console.log(data);
                  const q2="INSERT INTO `User` (`firstName`, `lastName`, `emailID`, `gender`, `phone`, `userAuthId`, `CreateTime`) VALUES (?,NOW())"
                  const val2=[req.body.firstName, req.body.lastName, req.body.email, 'M', req.body.phone,data[0].idUserAuth]
                  db.query(q2,[val2],(err,data)=>{
